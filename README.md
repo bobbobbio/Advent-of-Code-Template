@@ -33,7 +33,21 @@ Your puzzle input is downloaded to `one/input.txt`
 
 # Running a question
 
+```bash
+cargo run --package one < one/input.txt
+```
+
+# Submitting an answer
 
 ```bash
+cargo advent submit --name one --part 1
+cargo advent submit --name one --part 2
+```
 
+# Enabling the tests
+Once you have the correct answer for a problem, add the answer to the `harness!` macro to have a
+test generated.
+
+```rust
+harness!(part_1: 1234, part_2: 5678)
 ```
