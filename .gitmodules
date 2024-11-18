@@ -1,0 +1,6 @@
+[submodule "Advent-of-Code-Support"]
+	path = Advent-of-Code-Support
+	url = https://github.com/bobbobbio/Advent-of-Code-Support
+[submodule "support"]
+	path = support
+	url = https://github.com/bobbobbio/Advent-of-Code-Support
