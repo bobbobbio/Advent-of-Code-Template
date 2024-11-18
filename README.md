@@ -2,7 +2,7 @@ This is a template for a repository to do [Advent of Code](http://adventofcode.c
 
 # How to set-up
 
-First you need to put your Advent of Code session token. See [this
+First you need to obtain your Advent of Code session token. See [this
 link](https://github.com/wimglenn/advent-of-code-wim/issues/1) for instructions on how to obtain it,
 then paste the part after `session=` in `~/.config/aoc/token`
 
