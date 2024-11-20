@@ -67,3 +67,58 @@ test generated.
 ```rust
 harness!(part_1: 1234, part_2: 5678)
 ```
+
+# Tips on Parsing Input
+Each day has a pre-populated `part_1` and `part_2` function. The argument to these functions is
+anything which implements the
+[`parser::HasParser`](https://bobbobbio.github.io/advent-of-code-support/parse/trait.HasParser.html) trait.
+
+For parsing things which turn into lists, there is a convenient type to help with this called
+[`List`](https://bobbobbio.github.io/advent-of-code-support/parse/struct.List.html).
+
+Here are some examples
+
+```rust
+List<u32, SepBy<CommaSpace>> // parses: "1, 2, 3, 4"
+List<u32, SepBy<Comma>> // parses: "1,2,3,4"
+List<u32, TermWith<Comma>> // parses: "1,2,3,4,"
+List<u32, TermWith<NewLine>> // parses: "1\n2\n3\n"
+List<List<u32, SepBy<Comma>>, TermWith<NewLine>> // parses: "1,2,3,4\n5,6,7,8"
+```
+
+`HasParser` is also implemented for `Vec` with no separator.
+
+You can derive `HasParser` for your own types easily
+
+```rust
+// By default it will parse variants as their name but converted to snake_case
+#[derive(Debug, HasParser)]
+enum Color {
+    Red,
+    Green,
+    Blue,
+}
+
+// For structs it will parse the fields in order with space as a separator
+// If you want to control the separator, use the `sep_by` attribute
+#[derive(Debug, HasParser)]
+struct Round {
+    count: u64,
+    color: Color,
+}
+
+// You can add expected strings to the parsing before or after a field
+#[derive(Debug, HasParser)]
+struct Game {
+    #[parse(before = "Game ", after = ":")]
+    id: u64,
+    rounds: List<List<Round, SepBy<CommaSpace>>, SepBy<SemiSpace>>,
+}
+
+fn main() {
+    let game: Game = parse::parse_str("\
+        Game 1: 1 green, 6 red, 4 blue; 2 blue, 6 green, 7 red; 3 red, 4 blue, 6 green; 3 green\n\
+        Game 2: 2 blue, 4 red, 7 green; 17 red, 3 blue, 2 green; 3 green, 14 red, 1 blue\
+    ").unwrap();
+}
+```
