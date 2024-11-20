@@ -92,6 +92,7 @@ You can derive `HasParser` for your own types easily
 
 ```rust
 // By default it will parse variants as their name but converted to snake_case
+// If you want to control how a variant parses, use the `string` attribute
 #[derive(Debug, HasParser)]
 enum Color {
     Red,
