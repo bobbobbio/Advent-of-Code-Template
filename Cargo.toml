@@ -11,6 +11,7 @@ resolver = "2"
 advent = { path = "support/advent" }
 advent_macro = { path = "support/advent_macro" }
 combine = "4.6.7"
-derive_more = "1"
+derive_more = { version = "1", features = ["debug", "display"] }
 parse = { path = "support/parse" }
 parse_macro = { path = "support/parse_macro" }
+strum = { version = "0.26", features = ["derive"] }
