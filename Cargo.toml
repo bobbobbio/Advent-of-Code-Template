@@ -11,5 +11,6 @@ resolver = "2"
 advent = { path = "support/advent" }
 advent_macro = { path = "support/advent_macro" }
 combine = "4.6.7"
+derive_more = "1"
 parse = { path = "support/parse" }
 parse_macro = { path = "support/parse_macro" }
